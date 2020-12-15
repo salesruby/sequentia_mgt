@@ -14,14 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+Route::get('/setup', 'SetupController@index');
 
 
-Route::post('demo/request', 'DemoController@store');
-Route::get('sequentia/logs', function (){
-    return redirect()->to('http://sequentia-api.salesruby.com/api/logs');
+Route::group(['middleware' => 'admin'], function ($router) {
+
+    Route::post('demo/request', 'DemoController@store');
+    Route::get('sequentia/logs', function () {
+        return redirect()->to('http://sequentia-api.salesruby.com/api/logs');
+    });
 });
 
 // Route::post('registration', 'UtilityController@classicForm');
