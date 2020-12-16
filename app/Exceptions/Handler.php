@@ -93,12 +93,12 @@ class Handler extends ExceptionHandler
                 'message' =>'You are unauthorized to access this resource'
             ], 400);
         }
-        elseif ($exception instanceof QueryException){
-            return  response()->json([
-                'status' => 'error',
-                'message' =>'Error occurred while storing your data'
-            ], 400);
-        }
+//        elseif ($exception instanceof QueryException){
+//            return  response()->json([
+//                'status' => 'error',
+//                'message' =>'Error occurred while storing your data'
+//            ], 400);
+//        }
         return parent::render($request, $exception);
     }
 }
