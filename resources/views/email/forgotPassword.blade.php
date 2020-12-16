@@ -68,7 +68,7 @@
 
     <div class="content">
         <div class="title m-b-md">
-            Hello {{$user->first_name}} Your token is {{$user->email}}
+            Hello {{$user->first_name}} Your token is {{$token}}
         </div>
 
         <div class="links">

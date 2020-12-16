@@ -10,7 +10,7 @@ class ResetPasswordController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('patient');
+        $this->middleware('admin' || 'user');
     }
 
     public function reset(ResetPasswordRequest $request){
