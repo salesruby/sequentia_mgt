@@ -90,7 +90,7 @@ class Handler extends ExceptionHandler
         elseif($exception instanceof AuthorizationException ){
             return  response()->json([
                 'status' => 'error',
-                'message' =>'You are unauthorized to invite user'
+                'message' =>'You are unauthorized to access this resource'
             ], 400);
         }
         elseif ($exception instanceof QueryException){
