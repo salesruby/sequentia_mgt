@@ -8,12 +8,9 @@ use Illuminate\Support\Facades\Hash;
 
 class ResetPasswordController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('admin' || 'user');
-    }
 
     public function reset(ResetPasswordRequest $request){
+
         $data =['status' => 'error', 'message'=> 'Your password is incorrect'];
         if(Hash::check($request->old_password, auth()->user()->password)){
             auth()->user()->update(['password' => bcrypt($request->new_password)]);
