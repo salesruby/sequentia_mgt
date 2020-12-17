@@ -19,11 +19,11 @@ class DemoController extends Controller
      */
     public function index()
     {
-        $requests = Demo::all();
+        $demoRequest = Demo::all();
         return response()->json([
             'status' => 'success',
             'message' => 'request successful',
-            'data' => ['requests' => $requests]
+            'data' => (object)['demo_request' => $demoRequest]
         ]);
 
     }
