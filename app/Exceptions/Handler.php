@@ -57,48 +57,43 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        if($exception instanceof NotFoundHttpException){
+        if ($exception instanceof NotFoundHttpException) {
             return response()->json([
                 'status' => 'error',
-                'message'=>'Route not found'
+                'message' => 'Route not found'
             ], 404);
-        }
-        elseif($exception instanceof TokenExpiredException){
+        } elseif ($exception instanceof TokenExpiredException) {
             $newToken = JWTAuth::parseToken()->refresh();
             return  response()->json([
                 'status' => 'error',
-                'message'=>'Token expired',
+                'message' => 'Token expired',
                 'data' => [
                     'access_token' => $newToken,
                     'token_type' => 'bearer',
                     'expires_in' => auth()->factory()->getTTL() * 60
                 ]
             ]);
-        }
-        elseif($exception instanceof TokenInvalidException){
+        } elseif ($exception instanceof TokenInvalidException) {
             return  response()->json([
                 'status' => 'error',
-                'message' =>'Token is invalid'
+                'message' => 'Token is invalid'
             ], 400);
-        }
-        elseif($exception instanceof JWTException){
+        } elseif ($exception instanceof JWTException) {
             return  response()->json([
                 'status' => 'error',
-                'message' =>'Token is required'
+                'message' => 'Token is required'
             ], 400);
-        }
-        elseif($exception instanceof AuthorizationException ){
+        } elseif ($exception instanceof AuthorizationException) {
             return  response()->json([
                 'status' => 'error',
-                'message' =>'You are unauthorized to access this resource'
+                'message' => 'You are unauthorized to invite user'
+            ], 400);
+        } elseif ($exception instanceof QueryException) {
+            return  response()->json([
+                'status' => 'error',
+                'message' => 'Error occurred while storing your data'
             ], 400);
         }
-//        elseif ($exception instanceof QueryException){
-//            return  response()->json([
-//                'status' => 'error',
-//                'message' =>'Error occurred while storing your data'
-//            ], 400);
-//        }
         return parent::render($request, $exception);
     }
 }
