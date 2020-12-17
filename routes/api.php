@@ -20,6 +20,7 @@ Route::get('/setup', 'SetupController@index');
 
 Route::group(['middleware' => 'admin'], function ($router) {
     Route::post('demo/request', 'DemoController@store');
+    Route::get('demo/request', 'DemoController@index');
     Route::get('sequentia/logs', function () {
         return redirect()->to('http://sequentia-api.salesruby.com/api/logs');
     });
